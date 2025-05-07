@@ -1,106 +1,112 @@
 # 📊 Statistical Inference and Density Estimation in R
 
-This repository contains an advanced statistical computing assignment written in **R and LaTeX (`.Rnw`)**, focusing on theoretical derivation and simulation-based validation. Topics include **method of moments**, **kurtosis of t-distributions**, **kernel density estimation**, **ISE minimization**, and **MLE for skewed-t models** across 60+ years of S&P 500 daily return data.
+This repository presents a comprehensive statistical modeling project written in **R with LaTeX integration** (`.Rnw`). It covers analytical derivation and simulation-based validation of:
 
-> 🧠 Built as part of EECS 545 coursework at the University of Michigan.
+- Mixture models using method of moments
+- Kurtosis-based t-distribution fitting
+- Kernel Density Estimation (KDE) with ISE minimization
+- Skewed-t distribution maximum likelihood estimation (MLE) across 60+ years of S&P 500 returns
 
 ---
 
-## 📦 Project Structure
+## 🗂 Project Files
 
 | File | Description |
 |------|-------------|
-| `HW2_HaoChun_Shih.Rnw` | Main R + LaTeX source file |
-| `HW2_HaoChun_Shih.pdf` | Rendered final report |
-| `sp500_full.csv` | Historical daily S&P 500 data |
+| `HW2_HaoChun_Shih.Rnw` | Main R + LaTeX source |
+| `HW2_HaoChun_Shih.pdf` | Compiled report |
+| `sp500_full.csv` | Historical S&P 500 daily return dataset |
 
 ---
 
-## 🧪 Key Topics Covered
+## 📌 Topics Covered
 
-### 1️⃣ Mixture Model Moment Derivation
-- Derived formulas for \( E[|X - \mu|] \) and \( E[(X - \mu)^2] \) in a 2-component normal mixture model.
-- Constructed **method-of-moments estimators** for \( p \), \( c \), and \( \mu \).
+### 1️⃣ Method of Moments for Normal Mixtures
 
-### 2️⃣ Estimating Degrees of Freedom via Kurtosis
-- Computed analytical kurtosis of a **t-distribution**.
-- Given sample kurtosis = 9, derived \( \hat{\nu} = 5 \) as the best-fit degrees of freedom.
-
-### 3️⃣ Kernel Density Estimation (KDE) and ISE
-- Simulated Gaussian mixture data and evaluated **KDE with various bandwidths**.
-- Derived closed-form formula for **Integrated Squared Error (ISE)**.
-- Identified optimal bandwidth \( h^* = 0.25 \) minimizing ISE.
-
-📈 KDE vs True Distribution:
-![KDE Plot](https://user-images.githubusercontent.com/your_id/kde_ise_plot.png)
+- Derived:
+  \[
+  E[|X - \mu|] = p|c| + (1 - p)|-c| = |c|(2p - 1), \quad \text{Var}(X) = c^2
+  \]
+- Solved for \( \hat{p}, \hat{c}, \hat{\mu} \) via sample moments.
 
 ---
 
-## 📉 Auto-Correlation Analysis of Returns
+### 2️⃣ Kurtosis and Estimating \( \nu \) in t-Distribution
 
-Analyzed lag-based autocorrelations of S&P 500 returns and squared returns. While raw returns had little persistence, squared returns showed strong autocorrelation, consistent with volatility clustering.
-
-#### ACF of Returns:
-<img src="ACF-1.png" width="600"/>
-
-#### ACF of Squared Returns:
-<img src="ACF-2.png" width="600"/>
+- Given sample kurtosis = 9, inverted closed-form kurtosis function of t-distribution:
+  \[
+  \text{kurt}(t_\nu) = \frac{6}{\nu - 4} + 3
+  \Rightarrow \hat{\nu} = 5
+  \]
 
 ---
 
-## 📐 Q-Q Plot Comparisons
+### 3️⃣ Kernel Density Estimation & ISE Minimization
 
-### Normal vs t-distribution fit:
-<img src="qqplots-1.png" width="600"/>
+Simulated data from a 2-component Gaussian mixture and estimated density using different kernel bandwidths.
 
-### Model Fitting via t-distribution (ν = 3, 4.2, 4.4):
-<img src="model_fitting_via_qqplots.png" width="600"/>
+#### 📊 KDE Visualization at Different \( h \)
+<img src="Images/KDE-1.png" width="500"/>
 
----
+#### 📉 ISE Minimization to Find Optimal \( h^* \)
+<img src="Images/ISEPlot-1.png" width="500"/>
 
-## 📈 Historical Return Patterns
-
-### S&P 500 Daily Returns (1962–2023)
-<img src="S&P500_Returns.png" width="600"/>
-
-### TSLA & NVDA Return Comparison (2022–2024)
-<img src="Stock_Returns.png" width="600"/>
+#### 📐 KDE vs True Density at Optimal \( h = 0.25 \)
+<img src="Images/PlotOptimization-1.png" width="500"/>
 
 ---
 
-## 🔍 MLE for Skewed t-Distribution (1962–2023)
+### 4️⃣ Skewed-t Distribution MLE on S&P 500 Returns (1962–2023)
 
-- Estimated \( \mu, \sigma, \nu, \xi \) using `optim()` with **BFGS** and **Nelder-Mead** methods.
-- Plotted **point estimates with 95% confidence intervals** across years.
-- Found **2020** exhibits **infinite variance** (\( \nu < 2 \)), likely due to COVID-19 market shock.
-- Identified **significant skewness** in 1965, 1982, 1984, 1985, 2007, 2014.
+- Estimated four parameters: \( \mu, \sigma, \nu, \xi \) with BFGS & Nelder-Mead
+- Constructed 95% confidence intervals for each
+- Identified:
+  - 📉 **2020** had infinite variance estimate \( \nu < 2 \)
+  - 📈 Strong skewness in 1984, 2007, 2014
 
-📊 Visualization of infinite-variance year:
-![2020 Returns](https://user-images.githubusercontent.com/your_id/infinite_variance_returns.png)
+#### 📊 Point Estimate & CI (BFGS)
+<img src="Images/PlotNu-1.png" width="600"/>
 
-📊 Kernel vs fitted skew-t distribution (1984):
-![Skewed t KDE](https://user-images.githubusercontent.com/your_id/skew_t_kde_1984.png)
+#### 📊 Point Estimate & CI (Nelder-Mead)
+<img src="Images/PlotNu-2.png" width="600"/>
 
----
+#### 📈 Year 2020 Daily Returns (Infinite Variance)
+<img src="Images/PlotSkewness-1.png" width="500"/>
 
-## 🧠 Key Conclusions
-
-- ✅ **Method of moments** yields accurate estimates with simulation validation.
-- ✅ **ISE-based KDE** demonstrates bandwidth selection via theory-driven optimization.
-- ✅ **Skewed-t fitting** with BFGS is more numerically stable than Nelder-Mead.
-- ⚠️ **Years with \( \nu < 2 \)** indicate **infinite-variance behavior**, especially 2020.
-- 🎯 Multiple years show **statistically significant skewness**, informing risk modeling.
+#### 📈 KDE vs Fitted Skew-t (1984)
+<img src="Images/PlotOptimization-2.png" width="500"/>
 
 ---
 
-## 💻 Reproducibility
+## 🧮 Sample Code
 
-To compile this project:
-
-1. Open `HW2_HaoChun_Shih.Rnw` in RStudio
-2. Ensure knitr is selected in: `Tools → Global Options → Sweave → Weave Rnw files using knitr`
-3. Click "Knit to PDF"
-
-Required packages:
+### Simulate 2-component Mixture Data
 ```r
-install.packages(c("knitr", "ggplot2", "dplyr", "xts", "MASS"))
+set.seed(123)
+n = 1000
+p = 0.3
+mu = 0
+c = 2
+mix = rbinom(n, 1, p)
+X = mu + c * (2 * mix - 1) + rnorm(n)
+
+m1 = mean(abs(X - mean(X)))
+m2 = var(X)
+c_hat = sqrt(m2)
+p_hat = (m1 / c_hat + 1) / 2
+
+ISE = function(h, x) {
+  fhat = density(x, bw=h)$y
+  ftrue = dnorm(x)
+  return(mean((fhat - ftrue)^2))
+}
+opt_h = optimize(ISE, c(0.05, 0.8), x=X)$minimum
+
+negloglik = function(par, x) {
+  mu = par[1]; sigma = exp(par[2])
+  nu = exp(par[3]); xi = par[4]
+  loglik = -sum(log(dskewt(x, mu, sigma, nu, xi)))
+  return(loglik)
+}
+optim(par=c(0, log(1), log(5), 1), fn=negloglik, x=returns) 
+```
