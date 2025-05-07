@@ -9,6 +9,36 @@ This repository presents a comprehensive statistical modeling project written in
 
 ---
 
+## 🧮 Sample Code
+
+```r
+set.seed(123)
+n = 1000; p = 0.3; mu = 0; c = 2
+mix = rbinom(n, 1, p)
+X = mu + c * (2 * mix - 1) + rnorm(n)
+
+m1 = mean(abs(X - mean(X)))
+m2 = var(X)
+c_hat = sqrt(m2)
+p_hat = (m1 / c_hat + 1) / 2
+
+ISE = function(h, x) {
+  fhat = density(x, bw=h)$y
+  ftrue = dnorm(x)
+  mean((fhat - ftrue)^2)
+}
+opt_h = optimize(ISE, c(0.05, 0.8), x=X)$minimum
+
+negloglik = function(par, x) {
+  mu = par[1]; sigma = exp(par[2])
+  nu = exp(par[3]); xi = par[4]
+  loglik = -sum(log(dskewt(x, mu, sigma, nu, xi)))
+  return(loglik)
+}
+optim(par=c(0, log(1), log(5), 1), fn=negloglik, x=returns)
+
+---
+
 ## 🗂 Project Files
 
 | File | Description |
@@ -63,36 +93,6 @@ Estimated four parameters: \( \mu, \sigma, \nu, \xi \) using both BFGS and Nelde
 - 📉 **Heavy-tailed years** include 1987 (Black Monday), 2008 (Global Financial Crisis), 2010 (Flash Crash), and 2016 (Geopolitical events).
 - 🎯 **Statistically significant skewness** found in 1965, 1982, 1984, 1985, 2007, and 2014. For example, 1984 has \( \hat{\xi} = 1.42 \), rejecting the null hypothesis \( H_0: \xi = 1 \) at 5% level.
 - 🧭 **BFGS is more stable** than Nelder-Mead across all parameter estimates, especially for estimating the degrees of freedom parameter \( \nu \).
-
----
-
-## 🧮 Sample Code
-
-```r
-set.seed(123)
-n = 1000; p = 0.3; mu = 0; c = 2
-mix = rbinom(n, 1, p)
-X = mu + c * (2 * mix - 1) + rnorm(n)
-
-m1 = mean(abs(X - mean(X)))
-m2 = var(X)
-c_hat = sqrt(m2)
-p_hat = (m1 / c_hat + 1) / 2
-
-ISE = function(h, x) {
-  fhat = density(x, bw=h)$y
-  ftrue = dnorm(x)
-  mean((fhat - ftrue)^2)
-}
-opt_h = optimize(ISE, c(0.05, 0.8), x=X)$minimum
-
-negloglik = function(par, x) {
-  mu = par[1]; sigma = exp(par[2])
-  nu = exp(par[3]); xi = par[4]
-  loglik = -sum(log(dskewt(x, mu, sigma, nu, xi)))
-  return(loglik)
-}
-optim(par=c(0, log(1), log(5), 1), fn=negloglik, x=returns)
 
 ---
 
