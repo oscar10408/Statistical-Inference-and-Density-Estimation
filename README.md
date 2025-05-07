@@ -69,25 +69,40 @@ Simulated data from a 2-component Gaussian mixture and estimated density using d
 
 Estimated four parameters: μ (mean), σ (scale), ν (degrees of freedom), and ξ (skewness) using both BFGS and Nelder-Mead optimization methods. Plotted 95% confidence intervals and parameter trajectories across decades of S&P 500 returns.
 
-#### 📊 Point Estimate & CI (BFGS)
-<img src="Images/PlotNu-1.png" width="600"/>
+<div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 20px;">
 
-| Year | Method | ν     |
-|------|--------|--------|
-| 2020 | BFGS   | 1.9826 |
-| 2020 | NM     | 1.9136 |
+  <!-- 左邊圖片 -->
+  <div style="flex: 1;">
+    <h4>📊 Point Estimate & CI (BFGS)</h4>
+    <img src="Images/PlotNu-1.png" width="100%"/>
+  </div>
 
-| Year | Method | ν     |
-|------|--------|--------|
-| 1987 | BFGS   | 2.4220 |
-| 2008 | BFGS   | 2.3181 |
-| 2010 | BFGS   | 2.8569 |
-| 2016 | BFGS   | 2.8540 |
-| 1987 | NM     | 2.3880 |
-| 2008 | NM     | 2.3025 |
-| 2010 | NM     | 2.7408 |
-| 2016 | NM     | 2.6563 |
-| 2018 | NM     | 2.9800 |
+  <!-- 右邊兩個表格 -->
+  <div style="flex: 1; font-size: 14px;">
+    <h4>⚠️ Infinite Variance Years</h4>
+    <table>
+      <tr><th>Year</th><th>Method</th><th>ν</th></tr>
+      <tr><td>2020</td><td>BFGS</td><td>1.9826</td></tr>
+      <tr><td>2020</td><td>NM</td><td>1.9136</td></tr>
+    </table>
+
+    <h4>📈 Heavy-Tailed Years (2 < ν < 3)</h4>
+    <table>
+      <tr><th>Year</th><th>Method</th><th>ν</th></tr>
+      <tr><td>1987</td><td>BFGS</td><td>2.4220</td></tr>
+      <tr><td>2008</td><td>BFGS</td><td>2.3181</td></tr>
+      <tr><td>2010</td><td>BFGS</td><td>2.8569</td></tr>
+      <tr><td>2016</td><td>BFGS</td><td>2.8540</td></tr>
+      <tr><td>1987</td><td>NM</td><td>2.3880</td></tr>
+      <tr><td>2008</td><td>NM</td><td>2.3025</td></tr>
+      <tr><td>2010</td><td>NM</td><td>2.7408</td></tr>
+      <tr><td>2016</td><td>NM</td><td>2.6563</td></tr>
+      <tr><td>2018</td><td>NM</td><td>2.9800</td></tr>
+    </table>
+  </div>
+
+</div>
+
 
 
 #### 📊 Point Estimate & CI (Nelder-Mead)
