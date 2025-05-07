@@ -54,20 +54,20 @@ optim(par=c(0, log(1), log(5), 1), fn=negloglik, x=returns)
 
 Simulated data from a 2-component Gaussian mixture and estimated density using different kernel bandwidths.
 
-#### 📊 KDE Visualization at Different \( h \)
+#### 📊 KDE Visualization at Different h
 <img src="Images/KDE-1.png" width="500"/>
 
-#### 📉 ISE Minimization to Find Optimal \( h^* \)
+#### 📉 ISE Minimization to Find Optimal h*
 <img src="Images/ISEPlot-1.png" width="500"/>
 
-#### 📐 KDE vs True Density at Optimal \( h = 0.25 \)
+#### 📐 KDE vs True Density at Optimal h = 0.25
 <img src="Images/PlotOptimization-1.png" width="500"/>
 
 ---
 
 ### 2️⃣ Skewed-t Distribution MLE on S&P 500 Returns (1962–2023)
 
-Estimated four parameters: \( \mu, \sigma, \nu, \xi \) using both BFGS and Nelder-Mead optimization methods. Plotted 95% confidence intervals and parameter trajectories across decades.
+Estimated four parameters: μ (mean), σ (scale), ν (degrees of freedom), and ξ (skewness) using both BFGS and Nelder-Mead optimization methods. Plotted 95% confidence intervals and parameter trajectories across decades of S&P 500 returns.
 
 #### 📊 Point Estimate & CI (BFGS)
 <img src="Images/PlotNu-1.png" width="600"/>
@@ -85,13 +85,14 @@ Estimated four parameters: \( \mu, \sigma, \nu, \xi \) using both BFGS and Nelde
 
 ## ✅ Key Findings & Conclusion
 
-- 📌 **Method of Moments** successfully recovers \( \mu, p, c \) using absolute deviation and variance; confidence intervals for estimators are derived via simulation (n=500, N=1000).
-- 📌 **Kurtosis-based estimation** shows that for kurtosis = 9, the best-fitting t-distribution has \( \nu = 5 \).
-- 📌 **KDE bandwidth optimization** via ISE yields optimal \( h^* = 0.25 \), balancing bias and variance in the mixture distribution.
-- ⚠️ **2020 has infinite variance** (both BFGS: \( \nu = 1.98 \), NM: \( \nu = 1.91 \)) due to extreme COVID-19 market shocks.
+- 📌 **Method of Moments** successfully recovers μ, p, and c using absolute deviation and variance. Confidence intervals for estimators are derived via simulation (n = 500, N = 1000).
+- 📌 **Kurtosis-based estimation** shows that for kurtosis = 9, the best-fitting t-distribution has ν = 5.
+- 📌 **KDE bandwidth optimization** via ISE yields optimal h* = 0.25, balancing bias and variance in the mixture distribution.
+- ⚠️ **2020 exhibits infinite variance** (both BFGS: ν = 1.98, NM: ν = 1.91) due to extreme COVID-19 market shocks.
 - 📉 **Heavy-tailed years** include 1987 (Black Monday), 2008 (Global Financial Crisis), 2010 (Flash Crash), and 2016 (Geopolitical events).
-- 🎯 **Statistically significant skewness** found in 1965, 1982, 1984, 1985, 2007, and 2014. For example, 1984 has \( \hat{\xi} = 1.42 \), rejecting the null hypothesis \( H_0: \xi = 1 \) at 5% level.
-- 🧭 **BFGS is more stable** than Nelder-Mead across all parameter estimates, especially for estimating the degrees of freedom parameter \( \nu \).
+- 🎯 **Statistically significant skewness** appears in 1965, 1982, 1984, 1985, 2007, and 2014. For example, in 1984, ξ̂ = 1.42, rejecting the null hypothesis H₀: ξ = 1 at the 5% level.
+- 🧭 **BFGS optimizer is more stable** than Nelder-Mead across all parameter estimates, especially for estimating the degrees of freedom parameter ν.
+
 
 ---
 
