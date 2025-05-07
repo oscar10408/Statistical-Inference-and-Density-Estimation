@@ -21,27 +21,7 @@ This repository presents a comprehensive statistical modeling project written in
 
 ## 📌 Topics Covered
 
-### 1️⃣ Method of Moments for Normal Mixtures
-
-- Derived:
-  \[
-  E[|X - \mu|] = p|c| + (1 - p)|-c| = |c|(2p - 1), \quad \text{Var}(X) = c^2
-  \]
-- Solved for \( \hat{p}, \hat{c}, \hat{\mu} \) via sample moments.
-
----
-
-### 2️⃣ Kurtosis and Estimating \( \nu \) in t-Distribution
-
-- Given sample kurtosis = 9, inverted closed-form kurtosis function of t-distribution:
-  \[
-  \text{kurt}(t_\nu) = \frac{6}{\nu - 4} + 3
-  \Rightarrow \hat{\nu} = 5
-  \]
-
----
-
-### 3️⃣ Kernel Density Estimation & ISE Minimization
+### 1️⃣ Kernel Density Estimation & ISE Minimization
 
 Simulated data from a 2-component Gaussian mixture and estimated density using different kernel bandwidths.
 
@@ -56,7 +36,7 @@ Simulated data from a 2-component Gaussian mixture and estimated density using d
 
 ---
 
-### 4️⃣ Skewed-t Distribution MLE on S&P 500 Returns (1962–2023)
+### 2️⃣ Skewed-t Distribution MLE on S&P 500 Returns (1962–2023)
 
 - Estimated four parameters: \( \mu, \sigma, \nu, \xi \) with BFGS & Nelder-Mead
 - Constructed 95% confidence intervals for each
