@@ -13,8 +13,8 @@ This repository presents a comprehensive statistical modeling project written in
 
 | File | Description |
 |------|-------------|
-| `HW2_HaoChun_Shih.Rnw` | Main R + LaTeX source |
-| `HW2_HaoChun_Shih.pdf` | Compiled report |
+| `Statistical-Inference-and-Density-Estimation.Rnw` | Main R + LaTeX source |
+| `Statistical-Inference-and-Density-Estimation.pdf` | Compiled report |
 | `sp500_full.csv` | Historical S&P 500 daily return dataset |
 
 ---
@@ -100,6 +100,6 @@ optim(par=c(0, log(1), log(5), 1), fn=negloglik, x=returns)
 
 To reproduce the report:
 
-1. Open `Financial_TimeSeries_and_RiskModeling.Rnw` in **RStudio**
+1. Open `Statistical-Inference-and-Density-Estimation.Rnw` in **RStudio**
 2. Set knitting engine to **knitr**
 3. Click **Knit to PDF**
