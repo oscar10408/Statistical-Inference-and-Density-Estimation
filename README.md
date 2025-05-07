@@ -40,12 +40,11 @@ optim(par=c(0, log(1), log(5), 1), fn=negloglik, x=returns)
 ---
 
 ## 🗂 Project Files
-
 | File | Description |
 |------|-------------|
 | `Statistical-Inference-and-Density-Estimation.Rnw` | Main R + LaTeX source |
 | `Statistical-Inference-and-Density-Estimation.pdf` | Compiled report |
-| `sp500_full.csv` | Historical S&P 500 daily return dataset |
+| `sp500_full.csv` | Historical S&P 500 data |
 
 ---
 
