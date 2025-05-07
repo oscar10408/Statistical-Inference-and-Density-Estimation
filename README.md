@@ -93,3 +93,13 @@ negloglik = function(par, x) {
   return(loglik)
 }
 optim(par=c(0, log(1), log(5), 1), fn=negloglik, x=returns)
+
+---
+
+## 💻 How to Compile
+
+To reproduce the report:
+
+1. Open `Financial_TimeSeries_and_RiskModeling.Rnw` in **RStudio**
+2. Set knitting engine to **knitr**
+3. Click **Knit to PDF**
