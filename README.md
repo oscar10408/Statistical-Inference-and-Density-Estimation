@@ -36,7 +36,7 @@ negloglik = function(par, x) {
   return(loglik)
 }
 optim(par=c(0, log(1), log(5), 1), fn=negloglik, x=returns)
-
+```
 ---
 
 ## 🗂 Project Files
